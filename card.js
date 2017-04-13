@@ -1,12 +1,13 @@
 var inquirer = require("inquirer");
 var card = require('./constructor');
 var file = require('./file');
+var questionObj;
 
 inquirer.prompt([
 	{
 		type:"list",
-		message:"what type of card would you like to make today?",
-		choices:["Basic card","Cloze card"],
+		message:"what would you like to do with your cards?",
+		choices:["Get clozed card","Get basic card","Make basic card","Make cloze card"],
 		name:"card"
 	}
 	]).then(function(user){
@@ -14,8 +15,8 @@ inquirer.prompt([
 	});
 
 
-askCardInfo = function (user){
-	if(user.card === "Basic card"){
+ function askCardInfo(user){
+	if(user.card === "Make basic card"){
 		inquirer.prompt([
 			{
 				type:"input",
@@ -29,13 +30,13 @@ askCardInfo = function (user){
 			}
 
 		]).then(function(question){
-			var questionObj = new card.Basicard(question.question,question.answer);
-			questionObj.created();
-			file.writeBasic(JSON.stringify(questionObj));
+			questionObj = new card.Basicard(question.question,question.answer);
+			questionObj.partial();
+			file.writeBasic("," + JSON.stringify(questionObj) );
 		});
 
 	}
-	else {
+	else if(user.card === "Make cloze card"){
 		inquirer.prompt([
 			{
 				type:"input",
@@ -49,8 +50,17 @@ askCardInfo = function (user){
 			}
 
 		]).then(function(question){
-			var questionObj = new card.Clozecard(question.text,question.cloze);
-			file.writeCloze(JSON.stringify(questionObj));
+		    questionObj = new card.Clozecard(question.text,question.cloze);
+			if(questionObj.clozeDeleted){
+			file.writeCloze( "," +  JSON.stringify(questionObj));
+		}
 		});
 	}
+	else if(user.card === "Get basic card"){
+		file.readBasic();
+	}
+	else{
+		file.readCloze();
+	}
 }
+
