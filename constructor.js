@@ -25,3 +25,4 @@ exports.Clozecard = function (fulltext,cloze){
 	this.clozeDeleted = this.partial();
 }
 
+ ff

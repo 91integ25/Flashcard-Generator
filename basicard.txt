@@ -1,1 +1,1 @@
-{"front":"Who was the first president of the united states?","back":"George Washington"},{"front":"what is the fastest animal?","back":"cheetah"},{"front":"Who is the fastest person in the world?","back":"Usain Bolt"}
+{"front":"Who was the first president of the united states?","back":"George Washington"},{"front":"what is the fastest animal?","back":"cheetah"},{"front":"Who is the fastest person in the world?","back":"Usain Bolt"},{"front":"how many planets are in the solar system?","back":"9"}
